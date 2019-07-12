@@ -15,6 +15,8 @@ Pronto !!!
 
 Agora você pode criar CRUD simples em minutos após a modelagem do banco de dados, é só digitar 'max' em seu terminal.
 
+PS: Você tem que estar na raiz do projeto contendo a estrutura básica do framework da [Planweb](http://planweb.com.br/).
+
 
 ## Related Projects
 

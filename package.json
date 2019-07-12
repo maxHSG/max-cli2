@@ -9,6 +9,8 @@
   "files": [
     "*.md",
     "bin",
+    "templates",
+    "src",
     "lib"
   ],
   "scripts": {
@@ -26,14 +28,9 @@
   },
   "keywords": [],
   "license": "MIT",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
-    "inquirer": "^6.1.0",
-    "js-beautify": "^1.7.5",
-    "lodash": "^4.17.10",
-    "mysql": "^2.16.0",
+    "@prettier/plugin-php": "^0.6.0",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-eslint": "^7.2.3",
@@ -55,6 +52,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^19.0.2",
+    "prettier": "^1.14.2",
     "prettier-eslint-cli": "^4.7.0",
     "rimraf": "^2.5.4"
   },

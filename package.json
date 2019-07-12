@@ -27,12 +27,13 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    
+  },
+  "devDependencies": {
     "inquirer": "^6.1.0",
     "js-beautify": "^1.7.5",
     "lodash": "^4.17.10",
-    "mysql": "^2.16.0"
-  },
-  "devDependencies": {
+    "mysql": "^2.16.0",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-eslint": "^7.2.3",

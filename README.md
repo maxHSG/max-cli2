@@ -1,4 +1,4 @@
-# node-cli-boilerplate
+# max-cli
 
 ## Supports
 
@@ -7,11 +7,14 @@
 
 ## Start a project
 
-Make sure you have installed [Node.js](https://nodejs.org/).
+Tenha certeza que tenha o node instalado [Node.js](https://nodejs.org/).
 
-1. `git clone` this repo
-2. `cd` to this repo dir, and run `node setup`
-3. Happy hacking
+npm i -g "https://github.com/maxHSG/max-cli.git"
+
+Pronto !!!
+
+Agora você pode criar CRUD simples em minutos após a modelagem do banco de dados, é só digitar 'max' em seu terminal.
+
 
 ## Related Projects
 

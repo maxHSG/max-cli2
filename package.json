@@ -9,6 +9,8 @@
   "files": [
     "*.md",
     "bin",
+    "templates",
+    "src",
     "lib"
   ],
   "scripts": {

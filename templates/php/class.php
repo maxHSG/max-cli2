@@ -12,7 +12,7 @@ class {{module|camelCase}} extends {{module|camelCase}}Model{
 						tpl::tr(
 						{% for field in fields -%}
 							{% if field.Field !== 'etiquetas_ids' -%}
-								tpl::th('{{field.Field}}').
+								tpl::th('{{field.Field|prettyString}}').
 							{%- endif %}
 						{%- endfor %}
 							tpl::th('Menu')
@@ -85,12 +85,16 @@ class {{module|camelCase}} extends {{module|camelCase}}Model{
 
 		$body[] = tpl::wam();
 
-		{{form}}
+		{{form|raw}}
+
 
 		return 
-		Form::create(['action'=>'/painel/{{module|kebabCase}}/salvar/','class'=>'form form-ajax','method'=>'POST'],
+		Form::create(
+			['action'=>'/painel/{{module|kebabCase}}/salvar/','class'=>'form form-ajax','method'=>'POST'],
+			'{{module}}',
 			$body,
-		'Adicionar','{{module}}');
+			'Adicionar'
+		);
 
 	}
 
@@ -115,9 +119,12 @@ class {{module|camelCase}} extends {{module|camelCase}}Model{
 
 
 		return 
-		Form::create(['action'=>'/painel/{{module|kebabCase}}/pesquisar/','class'=>'form ','method'=>'GET'],
+		Form::create(
+			['action'=>'/painel/{{module|kebabCase}}/pesquisar/','class'=>'form ','method'=>'GET'],
+			'{{module}}',
 			$body,
-		'Buscar','{{module}}');
+			'Buscar'
+		);
 	}	
 
 }

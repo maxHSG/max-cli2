@@ -29,7 +29,7 @@ module.exports = ({ module, file, choice }) => {
 				break;
 		}
 
-		return `${CURR_DIR}/${config.php[file.replace(".php", "")]}/${namefile}`;
+		return `${CURR_DIR}${config.php[file.replace(".php", "")]}/${namefile}`;
 	}
 
 	return `${CURR_DIR}/${config.vue.store}/${module}/${file}`;

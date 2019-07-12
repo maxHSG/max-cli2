@@ -2,6 +2,11 @@ const fs = require("fs");
 const consultar = require("./mysql.js");
 const swig = require("swig");
 const prettier = require("prettier");
+const phpPlugin = require("@prettier/plugin-php/standalone");
+const { prettyString } = require("./util");
+
+const createForm = require("./createForm");
+
 const { exec } = require("child_process");
 
 const inquirer = require("inquirer");
@@ -25,17 +30,12 @@ const createDirectoryContents = async (templatePath, answers) => {
 	const choiceFile = answers["project-file-choice"];
 	const table = answers["table-name"];
 
-	// try {
 	const fields = table ? await consultar(`SHOW COLUMNS FROM ${table}`) : {};
-	// } catch (error) {
-	// 	await execute("vagrant up");
-	// 	console.log(
-	// 		"Não foi possivel conctar no bando de dados possivelmente o vagrant não está ativado"
-	// 	);
-	// 	process.exit();
 
-	// 	// const fields = table ? await consultar(`SHOW COLUMNS FROM ${table}`) : {};
-	// }
+	const form = createForm(fields);
+
+	//console.log("form", form);
+
 	const numbersSQL = [
 		"int",
 		"tinyint",
@@ -78,6 +78,7 @@ const createDirectoryContents = async (templatePath, answers) => {
 			});
 
 			swig.setFilter("camelCase", camelCase);
+			swig.setFilter("prettyString", prettyString);
 
 			swig.setFilter("typeIsNumber", string => {
 				return numbersSQL.filter(e => string.toLowerCase().indexOf(e) !== -1)
@@ -119,8 +120,9 @@ const createDirectoryContents = async (templatePath, answers) => {
 			});
 
 			const contents = swig.compileFile(origFilePath)({
-				table,
+				form,
 				numbersSQL,
+				table,
 				alias: table[0],
 				fields,
 				module,
@@ -140,9 +142,12 @@ const createDirectoryContents = async (templatePath, answers) => {
 				if (!answers["continue"]) return;
 			}
 
+			//console.log("contents", contents);
+
 			fs.writeFileSync(
 				writePath, // contents,
 				prettier.format(contents, {
+					plugins: [phpPlugin],
 					useTabs: true,
 					tabWidth: 4,
 					semi: true,

@@ -31,10 +31,10 @@
   "dependencies": {
     "inquirer": "^6.5.0",
     "mysql": "^2.17.1",
-    "prettier": "^1.18.2",
     "swig": "^1.4.2"
   },
   "devDependencies": {
+    "@prettier/plugin-php": "^0.11.2",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-eslint": "^7.2.3",
@@ -58,6 +58,7 @@
     "jest": "^19.0.2",
     "js-beautify": "^1.10.0",
     "lodash": "^4.17.14",
+    "prettier": "^1.18.2",
     "prettier-eslint-cli": "^4.7.0",
     "rimraf": "^2.5.4"
   },

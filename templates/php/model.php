@@ -205,23 +205,37 @@ class {{module|camelCase}}Model {
 
 	public static  function salvar($dados=[],$param=[]){
 
-		global $dominio;
+		//global $dominio;
 
-		$out = NULL;
+		$out = [];
 
 		$dados = !empty($dados) ? $dados : $_POST;
 
 		$bdo = new bdo('{{table}}');
 
-		$dados['dominio_id'] = !empty($dados['dominio_id']) ? $dados['dominio_id'] : $dominio['id'];
+		{% for field in fields -%}
+			
+			{% if field.Type.indexOf('date') !== -1 && field.Field !== 'data_cadastro' && field.Field !== 'data_atualizacao' -%}
+				$dados["{{field.Field}}"] = util::datasql($dados["{{field.Field}}"]);	
+			{%- endif %}
+
+			{% if field.Type.indexOf('double') !== -1  -%}
+				$dados["{{field.Field}}"] = util::moedasql($dados["{{field.Field}}"]);
+			{%- endif %}
+
+		{%- endfor %}
+
+		//$dados['dominio_id'] = !empty($dados['dominio_id']) ? $dados['dominio_id'] : $dominio['id'];
 
 		//$bdo->setValid('nome',3,'Informe um nome com pelo menos 3 letras');							
 		
-		$bdo->setCampo($dados);
+		
 
 		if (empty($dados['id'])) {
 
 			$dados['data_cadastro'] = date('Y-m-d');
+
+			$bdo->setCampo($dados);	
 
 			if ( !empty($id_add  = $bdo->adicionar()) ) {
 				$out['sucesso'] = true;				 		
@@ -232,6 +246,8 @@ class {{module|camelCase}}Model {
 		}elseif (!empty($dados['id']) && is_numeric($dados['id']) ) {
 
 			$dados['data_atualizacao'] = date('Y-m-d');
+
+		$bdo->setCampo($dados);
 
 			$bdo->setId($dados['id']);
 			
